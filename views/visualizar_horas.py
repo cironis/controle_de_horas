@@ -15,6 +15,6 @@ st.title("Controle de horas")
 
 df = load_main_dataframe("Horas por dia")
 
-df["period"] = pd.to_datetime(df["Dia"]).period("m")
+df["period"] = pd.to_datetime(df["Dia"]).to_period('M')
 
 st.dataframe(df)
