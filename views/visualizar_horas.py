@@ -5,6 +5,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Visualizar horas", page_icon="🕒", layout="wide")
 
+@st.cache_data
 def load_main_dataframe(worksheet):
     conn = st.connection("gsheets", type=GSheetsConnection)
     df = conn.read(worksheet=worksheet)
@@ -14,6 +15,6 @@ st.title("Controle de horas")
 
 df = load_main_dataframe("Horas por dia")
 
-st.dataframe(df)
+df["period"] = pd.to_datetime(df["Dia"])
 
-st.write("teste")
+st.dataframe(df)
