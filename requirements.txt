@@ -1,0 +1,8 @@
+
+streamlit
+pandas
+st-gsheets-connection
+streamlit-aggrid
+PyYAML
+streamlit_authenticator
+requests
