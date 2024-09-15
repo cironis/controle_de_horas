@@ -11,6 +11,8 @@ def load_main_dataframe(worksheet):
     df = conn.read(worksheet=worksheet)
     return df
 
-st.title("Database")
+st.title("Controle de horas")
 
 df = load_main_dataframe("Horas por dia")
+
+st.dataframe(df)
