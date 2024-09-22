@@ -60,7 +60,7 @@ st.title("Controle de horas")
 
 st.markdown("## Ano")
 
-seletor_ano = st.selectbox("Selecione o ano", df_horas["ano"].unique(),index=default_ano_index)
+seletor_ano = st.selectbox("Selecione o ano", unique_years,index=default_ano_index)
 df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
 heatmap_df = df_horas.pivot_table(index=['numero_do_dia_da_semana',"dia_da_semana"], columns='semana', values='Horas trabalhadas', aggfunc='sum',fill_value=0)
@@ -80,7 +80,7 @@ st.plotly_chart(heatmap)
 
 st.markdown("## Mês")
 
-seletor_mes = st.selectbox("Selecione o mês", df_horas["period"].unique(),index=default_mes_index)
+seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_index)
 
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 
