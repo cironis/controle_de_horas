@@ -46,7 +46,7 @@ heatmap_df = heatmap_df.reset_index(level='dia_da_semana')
 
 st.title("Controle de horas")
 
-color_selector = st.selectbox("Selecione a cor", ["Blackbody","Bluered","Blues",C "ividis","Earth","Electric","Greens","Greys","Hot","Jet","Picnic",Portl "and","Rainbow","RdBu","Reds","Viridis","YlGnBu","YlOrRd"])
+color_selector = st.selectbox("Selecione a cor", ["Blackbody","Bluered","Blues","Cividis","Earth","Electric","Greens","Greys","Hot","Jet","Picnic","Portland","Rainbow","RdBu","Reds","Viridis","YlGnBu","YlOrRd"])
 
 heatmap = go.Figure(data=go.Heatmap(
     z=heatmap_df.values,
