@@ -46,8 +46,6 @@ heatmap_df = heatmap_df.reset_index(level='dia_da_semana')
 
 st.title("Controle de horas")
 
-st.dataframe(heatmap_df)
-
 heatmap = go.Figure(data=go.Heatmap(
     z=heatmap_df.values,
     y=heatmap_df["dia_da_semana"].str[0],
