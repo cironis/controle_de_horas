@@ -2,6 +2,7 @@
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
+import plotly.graph_objs as go
 import plotly.express as px
 import numpy as np
 
