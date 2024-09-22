@@ -13,10 +13,19 @@ def load_main_dataframe(worksheet):
     df = conn.read(worksheet=worksheet)
     return df
 
-st.title("Controle de horas")
 
 # Carregando df das horas trabalhadas
 df_horas = load_main_dataframe("Horas por dia")
+
+# Criando df para o Heatmap
+dias_no_ano = pd.date_range(start=f'{anos.min()}-01-01', end=f'{anos.max()}-12-31', freq='D')
+
+all_days = pd.DataFrame({
+    'Dia': dias_no_ano,
+    'Horas trabalhadas': np.zeros(len(dias_no_ano)),
+})
+
+df_horas = pd.concat([all_days, df_horas], ignore_index=True)
 
 df_horas["Dia"] = pd.to_datetime(df_horas["Dia"])
 df_horas["ano"] = df_horas["Dia"].dt.year
@@ -25,26 +34,21 @@ df_horas["dia_da_semana"] = df_horas["Dia"].dt.day_name()
 df_horas["period"] = df_horas["Dia"].dt.to_period('M')
 df_horas["semana"] = df_horas["Dia"].dt.isocalendar().week
 
-# Criando df para o Heatmap
-dias_no_ano = pd.date_range(start=f'{df_horas["ano"].min()}-01-01', end=f'{df_horas["ano"].max()}-12-31', freq='D')
+anos = df_horas["ano"].unique()
 
-heatmap_df = pd.DataFrame({
-    'Dia': dias_no_ano,
-    'Horas trabalhadas': np.zeros(len(dias_no_ano)),
-    'dia_da_semana': dias_no_ano.day_name(),
-    'semana': dias_no_ano.isocalendar().week
-})
+df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
+seletor_ano = st.selectbox("Selecione o ano", anos)
 
-heatmap_df = pd.concat([heatmap_df, df_horas], ignore_index=True)
+heatmap_df = df_horas.pivot_table(index='dia_da_semana', columns='semana', values='Horas trabalhadas', aggfunc='sum')
 
-heatmap_df = heatmap_df.pivot_table(index='dia_da_semana', columns='semana', values='Horas trabalhadas', aggfunc='sum')
+st.title("Controle de horas")
 
 st.dataframe(heatmap_df)
 
-filter = st.selectbox("Selecione o mês", df_horas["period"].unique())
+seletor_mes = st.selectbox("Selecione o mês", df_horas["period"].unique())
 
-filtered_df = df_horas.loc[df_horas["period"] == filter]
+filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 
 st.dataframe(filtered_df)
 
