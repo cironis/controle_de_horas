@@ -33,9 +33,9 @@ heatmap_df = pd.DataFrame({
 })
 
 
-filter = st.selectbox("Selecione o mês", df["period"].unique())
+filter = st.selectbox("Selecione o mês", df_horas["period"].unique())
 
-filtered_df = df.loc[df["period"] == filter]
+filtered_df = df.loc[df_horas["period"] == filter]
 
 st.dataframe(filtered_df)
 
