@@ -33,7 +33,7 @@ df_horas["ano"] = df_horas["Dia"].dt.year
 
 df_horas["dia_da_semana"] = df_horas["Dia"].dt.day_name()
 df_horas["period"] = df_horas["Dia"].dt.to_period('M')
-df_horas['semana'] = (df['Data'].dt.day - 1) // 7 + 1
+df_horas['semana'] = (df_horas['Data'].dt.day - 1) // 7 + 1
 
 st.dataframe(df_horas)
 
