@@ -37,15 +37,18 @@ df_horas["numero_do_dia_da_semana"] = df_horas["Dia"].dt.weekday
 df_horas["period"] = df_horas["Dia"].dt.to_period('M')
 df_horas['semana'] = df_horas['Dia'].dt.strftime('%U').astype(int) + 1
 
+
+
+st.title("Controle de horas")
+
+st.markdown("## Ano")
+
 seletor_ano = st.selectbox("Selecione o ano", anos)
 df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
 heatmap_df = df_horas.pivot_table(index=['numero_do_dia_da_semana',"dia_da_semana"], columns='semana', values='Horas trabalhadas', aggfunc='sum',fill_value=0)
 
 heatmap_df = heatmap_df.reset_index(level='dia_da_semana')
-
-st.title("Controle de horas")
-
 heatmap = go.Figure(data=go.Heatmap(
     z=heatmap_df.values,
     y=heatmap_df["dia_da_semana"].str[0:3],
@@ -57,6 +60,8 @@ heatmap = go.Figure(data=go.Heatmap(
 heatmap.update_xaxes(showticklabels=False)
 
 st.plotly_chart(heatmap)
+
+st.markdown("## Mês")
 
 seletor_mes = st.selectbox("Selecione o mês", df_horas["period"].unique())
 
