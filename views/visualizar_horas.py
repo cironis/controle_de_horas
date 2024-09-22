@@ -39,21 +39,22 @@ df_horas["period"] = df_horas["Dia"].dt.to_period('M')
 df_horas['semana'] = df_horas['Dia'].dt.strftime('%U').astype(int) + 1
 
 agora = datetime.now()
-agora = pd.Timestamp(agora)
+agora_pandas = pd.Timestamp(agora)
+agora_mes = agora_pandas.to_period('M')
+agora_ano = agora_pandas.year
 
-agora_mes = agora.to_period('M')
-agora_ano = agora.year
+unique_periods = df_horas["period"].unique().tolist()
+unique_years = df_horas["ano"].unique().tolist()
 
-if agora_mes in df_horas["period"].values:
-    default_mes_index = df_horas[df_horas["period"] == agora_mes].index[0]
+if agora_mes in unique_periods:
+    default_mes_index = unique_periods.index(agora_mes)
 else:
     default_mes_index = 0
 
-# Find the index of the current year in the DataFrame
-if agora_ano in df_horas["ano"].values:
-    default_ano_index = df_horas[df_horas["ano"] == agora_ano].index[0]
+if agora_ano in unique_years:
+    default_ano_index = unique_years.index(agora_ano)
 else:
-    default_ano_index = 0 
+    default_ano_index = 0
 
 st.title("Controle de horas")
 
