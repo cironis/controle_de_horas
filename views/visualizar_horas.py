@@ -32,7 +32,7 @@ df_horas = pd.concat([all_days, df_horas], ignore_index=True)
 df_horas["ano"] = df_horas["Dia"].dt.year
 
 df_horas["dia_da_semana"] = df_horas["Dia"].dt.day_name()
-df_horas["numero_do_dia_da_semana"] = df_horas["Dia"].dt.weekday()
+df_horas["numero_do_dia_da_semana"] = df_horas["Dia"].dt.weekday
 df_horas["period"] = df_horas["Dia"].dt.to_period('M')
 df_horas['semana'] = df_horas['Dia'].dt.strftime('%U').astype(int) + 1
 
