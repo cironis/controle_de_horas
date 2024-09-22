@@ -37,8 +37,6 @@ df_horas["numero_do_dia_da_semana"] = df_horas["Dia"].dt.weekday
 df_horas["period"] = df_horas["Dia"].dt.to_period('M')
 df_horas['semana'] = df_horas['Dia'].dt.strftime('%U').astype(int) + 1
 
-st.dataframe(df_horas)
-
 seletor_ano = st.selectbox("Selecione o ano", anos)
 df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
@@ -50,10 +48,9 @@ st.title("Controle de horas")
 
 st.dataframe(heatmap_df)
 
-
 heatmap = go.Figure(data=go.Heatmap(
     z=heatmap_df.values,
-    y=heatmap_df["dia_da_semana"],
+    y=heatmap_df["dia_da_semana"].str[0],
     colorscale='Greens',  
     xgap=2,  
     ygap=2 
@@ -63,12 +60,9 @@ heatmap.update_xaxes(showticklabels=False)
 
 st.plotly_chart(heatmap)
 
-
 seletor_mes = st.selectbox("Selecione o mês", df_horas["period"].unique())
 
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
-
-st.dataframe(filtered_df)
 
 bar_chart = px.bar(filtered_df, x='Dia', y='Horas trabalhadas')
 
