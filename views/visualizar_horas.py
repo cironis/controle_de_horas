@@ -44,22 +44,11 @@ agora = pd.Timestamp(agora)
 agora_mes = agora.to_period('M')
 agora_ano = agora.year
 
-if agora_mes in df_horas["period"].values:
-    default_mes_index = df_horas[df_horas["period"] == agora_mes][0]
-else:
-    default_mes_index = 0
-
-# Find the index of the current year in the DataFrame
-if agora_ano in df_horas["ano"].values:
-    default_ano_index = df_horas[df_horas["ano"] == agora_ano][0]
-else:
-    default_ano_index = 0 
-
 st.title("Controle de horas")
 
 st.markdown("## Ano")
 
-seletor_ano = st.selectbox("Selecione o ano", df_horas["ano"].unique(),index=default_ano_index)
+seletor_ano = st.selectbox("Selecione o ano", df_horas["ano"].unique(),index=agora_ano)
 df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
 heatmap_df = df_horas.pivot_table(index=['numero_do_dia_da_semana',"dia_da_semana"], columns='semana', values='Horas trabalhadas', aggfunc='sum',fill_value=0)
@@ -79,7 +68,7 @@ st.plotly_chart(heatmap)
 
 st.markdown("## Mês")
 
-seletor_mes = st.selectbox("Selecione o mês", df_horas["period"].unique(),index=default_mes_index)
+seletor_mes = st.selectbox("Selecione o mês", df_horas["period"].unique(),index=agora_mes)
 
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 
