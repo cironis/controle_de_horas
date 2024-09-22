@@ -59,6 +59,8 @@ heatmap = go.Figure(data=go.Heatmap(
     ygap=2 
 ))
 
+heatmap.update_xaxes(showticklabels=False)
+
 st.plotly_chart(heatmap)
 
 
