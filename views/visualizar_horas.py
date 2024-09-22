@@ -45,13 +45,13 @@ agora_mes = agora.to_period('M')
 agora_ano = agora.year
 
 if agora_mes in df_horas["period"].values:
-    default_mes_index = df_horas[df_horas["period"] == agora_mes].index[0]
+    default_mes_index = df_horas[df_horas["period"] == agora_mes][0]
 else:
     default_mes_index = 0
 
 # Find the index of the current year in the DataFrame
 if agora_ano in df_horas["ano"].values:
-    default_ano_index = df_horas[df_horas["ano"] == agora_ano].index[0]
+    default_ano_index = df_horas[df_horas["ano"] == agora_ano][0]
 else:
     default_ano_index = 0 
 
