@@ -18,6 +18,7 @@ def load_main_dataframe(worksheet):
 df_horas = load_main_dataframe("Horas por dia")
 
 # Criando df para o Heatmap
+anos = df_horas["ano"].unique()
 dias_no_ano = pd.date_range(start=f'{anos.min()}-01-01', end=f'{anos.max()}-12-31', freq='D')
 
 all_days = pd.DataFrame({
@@ -34,11 +35,8 @@ df_horas["dia_da_semana"] = df_horas["Dia"].dt.day_name()
 df_horas["period"] = df_horas["Dia"].dt.to_period('M')
 df_horas["semana"] = df_horas["Dia"].dt.isocalendar().week
 
-anos = df_horas["ano"].unique()
-
-df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
-
 seletor_ano = st.selectbox("Selecione o ano", anos)
+df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
 heatmap_df = df_horas.pivot_table(index='dia_da_semana', columns='semana', values='Horas trabalhadas', aggfunc='sum')
 
