@@ -39,17 +39,25 @@ df_horas["period"] = df_horas["Dia"].dt.to_period('M')
 df_horas['semana'] = df_horas['Dia'].dt.strftime('%U').astype(int) + 1
 
 agora = datetime.now()
-agora_mes = agora.dt.to_period('M')
-default_mes_index = df_horas[df_horas["period"] == agora_mes].index[0]
+agora_mes = agora.to_period('M')
+agora_ano = agora.year
 
-agora_ano = agora.dt.year
-default_ano_index = df_horas[df_horas["ano"] == agora_ano].index[0]
+if agora_mes in df_horas["period"].values:
+    default_mes_index = df_horas[df_horas["period"] == agora_mes].index[0]
+else:
+    default_mes_index = 0
+
+# Find the index of the current year in the DataFrame
+if agora_ano in df_horas["ano"].values:
+    default_ano_index = df_horas[df_horas["ano"] == agora_ano].index[0]
+else:
+    default_ano_index = 0 
 
 st.title("Controle de horas")
 
 st.markdown("## Ano")
 
-seletor_ano = st.selectbox("Selecione o ano", anos,index=default_ano_index)
+seletor_ano = st.selectbox("Selecione o ano", df_horas["ano"].unique(),index=default_ano_index)
 df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
 heatmap_df = df_horas.pivot_table(index=['numero_do_dia_da_semana',"dia_da_semana"], columns='semana', values='Horas trabalhadas', aggfunc='sum',fill_value=0)
