@@ -39,6 +39,8 @@ df_horas["period"] = df_horas["Dia"].dt.to_period('M')
 df_horas['semana'] = df_horas['Dia'].dt.strftime('%U').astype(int) + 1
 
 agora = datetime.now()
+agora = pd.Timestamp(agora)
+
 agora_mes = agora.to_period('M')
 agora_ano = agora.year
 
