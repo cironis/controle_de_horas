@@ -3,6 +3,8 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 import plotly.express as px
+import calplot
+import numpy as np
 
 st.set_page_config(page_title="Visualizar horas", page_icon="🕒", layout="wide")
 
@@ -28,3 +30,9 @@ st.dataframe(filtered_df)
 bar_chart = px.bar(filtered_df, x='Dia', y='Horas trabalhadas')
 
 st.plotly_chart(bar_chart, use_container_width=True)
+
+all_days = pd.date_range('1/1/2019', periods=360, freq='D')
+days = np.random.choice(all_days, 500)
+events = pd.Series(np.random.randn(len(days)), index=days)
+calplot.calplot(events, edgecolor=None, cmap='YlGn')
+

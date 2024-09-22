@@ -5,3 +5,5 @@ st-gsheets-connection
 PyYAML
 streamlit_authenticator
 plotly
+calplot
+numpy
