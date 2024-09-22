@@ -52,8 +52,6 @@ st.dataframe(heatmap_df)
 
 heatmap = go.Figure(data=go.Heatmap(
     z=heatmap_df.values,
-    x=heatmap_df.columns,
-    y=heatmap_df.index,
     colorscale='Viridis',  # You can choose other color scales as well
     xgap=2,  # Gap between cells in x direction (horizontal grid lines)
     ygap=2   # Gap between cells in y direction (vertical grid lines)
