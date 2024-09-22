@@ -52,9 +52,10 @@ st.dataframe(heatmap_df)
 
 heatmap = go.Figure(data=go.Heatmap(
     z=heatmap_df.values,
-    colorscale='Viridis',  # You can choose other color scales as well
-    xgap=2,  # Gap between cells in x direction (horizontal grid lines)
-    ygap=2   # Gap between cells in y direction (vertical grid lines)
+    y=heatmap_df["dia_da_semana"],
+    colorscale='Greens',  
+    xgap=2,  
+    ygap=2 
 ))
 
 st.plotly_chart(heatmap)
