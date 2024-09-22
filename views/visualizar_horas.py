@@ -23,15 +23,24 @@ df_horas["ano"] = df_horas["Dia"].dt.year
 
 df_horas["dia_da_semana"] = df_horas["Dia"].dt.day_name()
 df_horas["period"] = df_horas["Dia"].dt.to_period('M')
+df_horas["semana"] = df_horas["Dia"].dt.isocalendar().week
 
 # Criando df para o Heatmap
 dias_no_ano = pd.date_range(start=f'{df_horas["ano"].min()}-01-01', end=f'{df_horas["ano"].max()}-12-31', freq='D')
 
 heatmap_df = pd.DataFrame({
-    'Data': dias_no_ano,
-    'Horas trabalhadas': np.zeros(len(dias_no_ano))
+    'Dia': dias_no_ano,
+    'Horas trabalhadas': np.zeros(len(dias_no_ano)),
+    'dia_da_semana': dias_no_ano.day_name(),
+    'semana': dias_no_ano.isocalendar().week
 })
 
+
+heatmap_df = pd.concat([heatmap_df, df_horas], ignore_index=True)
+
+heatmap_df = heatmap_df.pivot_table(index='dia_da_semana', columns='semana', values='Horas trabalhadas', aggfunc='sum')
+
+st.dataframe(heatmap_df)
 
 filter = st.selectbox("Selecione o mês", df_horas["period"].unique())
 
