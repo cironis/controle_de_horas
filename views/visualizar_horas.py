@@ -18,7 +18,7 @@ def load_main_dataframe(worksheet):
 df_horas = load_main_dataframe("Horas por dia")
 
 # Criando df para o Heatmap
-anos = df_horas["ano"].unique()
+anos = df_horas["Dia"].dt.year.unique()
 dias_no_ano = pd.date_range(start=f'{anos.min()}-01-01', end=f'{anos.max()}-12-31', freq='D')
 
 all_days = pd.DataFrame({
