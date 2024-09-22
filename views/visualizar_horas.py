@@ -44,6 +44,7 @@ df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
 heatmap_df = df_horas.pivot_table(index=['numero_do_dia_da_semana',"dia_da_semana"], columns='semana', values='Horas trabalhadas', aggfunc='sum',fill_value=0)
 
+heatmap_df = heatmap_df.reset_index(level='dia_da_semana')
 
 st.title("Controle de horas")
 
