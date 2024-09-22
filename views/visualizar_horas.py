@@ -34,5 +34,6 @@ st.plotly_chart(bar_chart, use_container_width=True)
 all_days = pd.date_range('1/1/2019', periods=360, freq='D')
 days = np.random.choice(all_days, 500)
 events = pd.Series(np.random.randn(len(days)), index=days)
-calplot.calplot(events, edgecolor=None, cmap='YlGn')
+teste = calplot.calplot(events, edgecolor=None, cmap='YlGn')
 
+st.plotly_chart(teste, use_container_width=True)
