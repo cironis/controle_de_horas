@@ -94,4 +94,10 @@ seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 filtered_df = filtered_df.loc[df_horas["Horas trabalhadas"] > 0]
 
-st.dataframe(filtered_df[["Data","Horas trabalhadas"]],hide_index = True,use_container_width=True)
+col_1,col_2 = st.columns(2)
+
+with col_1:
+    st.dataframe(filtered_df[["Data","Horas trabalhadas"]],hide_index = True,use_container_width=True)
+
+with col_2:
+    st.metric("Horas Total (Mẽs)", f"{filtered_df['Horas trabalhadas'].sum():.2f}")
