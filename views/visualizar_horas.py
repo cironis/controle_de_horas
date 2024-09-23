@@ -44,7 +44,7 @@ agora_mes = agora_pandas.to_period('M')
 agora_ano = agora_pandas.year
 
 unique_periods = df_horas["period"].loc[df_horas["period"] <= agora_mes].sort_values(ascending=False).unique().tolist()
-unique_years = df_horas["ano"].unique().tolist()
+unique_years = df_horas["ano"].sort_values(ascending=False).unique().tolist()
 
 if agora_mes in unique_periods:
     default_mes_index = unique_periods.index(agora_mes)
