@@ -92,5 +92,6 @@ st.markdown("## Horas por dia")
 
 seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_index)
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
+filtered_df = df_horas.loc[df_horas["Horas trabalhadas"] > 0]
 
-st.dataframe(filtered_df[["Data","Horas trabalhadas"]])
+st.dataframe(filtered_df[["Data","Horas trabalhadas"]],hide_index = True)
