@@ -15,7 +15,6 @@ def load_main_dataframe(worksheet):
     df = conn.read(worksheet=worksheet)
     return df
 
-
 # Carregando df das horas trabalhadas
 df_horas = load_main_dataframe("Horas por dia")
 
