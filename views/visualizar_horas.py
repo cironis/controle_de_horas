@@ -69,9 +69,9 @@ heatmap_df = heatmap_df.reset_index(level='dia_da_semana')
 heatmap = go.Figure(data=go.Heatmap(
     z=heatmap_df.values,
     y=heatmap_df["dia_da_semana"].str[0:3],
-    colorscale="Blues",  
-    xgap=2,  
-    ygap=2 
+    colorscale="Blues",
+    xgap=2,
+    ygap=2
 ))
 
 heatmap.update_xaxes(showticklabels=False)
@@ -84,6 +84,4 @@ seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_
 
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 
-bar_chart = px.bar(filtered_df, x='Dia', y='Horas trabalhadas')
-
-st.plotly_chart(bar_chart, use_container_width=True)
+st.dataframe(filtered_df)
