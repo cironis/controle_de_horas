@@ -3,7 +3,13 @@ import streamlit as st
 # --- PAGE SETUP ---
 visualizar_horas = st.Page(
     "views/visualizar_horas.py",
-    title="Visualizar horas",
+    title="Consultoria - Pró-Corpo",
+    icon=":material/overview:",
+)
+
+inserir_horas = st.Page(
+    "views/inserir_horas.py",
+    title="Área Logada",
     icon=":material/overview:",
 )
 
