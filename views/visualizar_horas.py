@@ -93,8 +93,4 @@ st.markdown("## Horas por dia")
 seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_index)
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 
-
-st.write(filtered_df.columns)
-
-
 st.dataframe(filtered_df[["Data","Horas trabalhadas"]])
