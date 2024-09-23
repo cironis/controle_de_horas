@@ -80,7 +80,7 @@ heatmap = go.Figure(data=go.Heatmap(
     colorscale="Blues",
     xgap=2,
     ygap=2,
-    hovertemplate=hovertemplate 
+    hovertemplate=hovertemplate
 ))
 
 heatmap.update_xaxes(showticklabels=False)
@@ -92,6 +92,6 @@ st.markdown("## Horas por dia")
 seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_index)
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 
-st.dataframe(filtered_df)
 
-st.write("Teste teste")
+st.write(filtered_df.columns)
+st.dataframe(filtered_df)
