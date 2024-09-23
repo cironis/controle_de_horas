@@ -21,7 +21,7 @@ inserir_horas = st.Page(
 pg = st.navigation(
     {
         "Visualização": [visualizar_horas],
-
+        "Área logada": [inserir_horas]
     }
 )
 
