@@ -93,3 +93,5 @@ seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 
 st.dataframe(filtered_df)
+
+st.write("Teste")
