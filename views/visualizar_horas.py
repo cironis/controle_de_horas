@@ -78,10 +78,9 @@ heatmap.update_xaxes(showticklabels=False)
 
 st.plotly_chart(heatmap)
 
-st.markdown("## Mês")
+st.markdown("## Horas por dia")
 
 seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_index)
-
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 
 st.dataframe(filtered_df)
