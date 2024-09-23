@@ -19,6 +19,7 @@ def load_main_dataframe(worksheet):
 df_horas = load_main_dataframe("Horas por dia")
 
 df_horas["Dia"] = pd.to_datetime(df_horas["Dia"])
+df_horas["Data"] = pd.to_datetime(df_horas["Dia"]).dt.strftime('%d/%m/%Y')
 anos = df_horas["Dia"].dt.year.unique()
 
 dias_no_ano = pd.date_range(start=f'{anos.min()}-01-01', end=f'{anos.max()}-12-31', freq='D')
@@ -94,4 +95,6 @@ filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
 
 
 st.write(filtered_df.columns)
-st.dataframe(filtered_df)
+
+
+st.dataframe(filtered_df[["Data","Horas trabalhadas"]])
