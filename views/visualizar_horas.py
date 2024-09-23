@@ -43,7 +43,7 @@ agora_pandas = pd.Timestamp(agora)
 agora_mes = agora_pandas.to_period('M')
 agora_ano = agora_pandas.year
 
-unique_periods = df_horas["period"].unique().tolist()
+unique_periods = df_horas["period"].loc[df_horas["period"] <= agora_mes].unique().tolist()
 unique_years = df_horas["ano"].unique().tolist()
 
 if agora_mes in unique_periods:
@@ -92,6 +92,6 @@ st.markdown("## Horas por dia")
 
 seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_index)
 filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
-filtered_df = df_horas.loc[df_horas["Horas trabalhadas"] > 0]
+filtered_df = filtered_df.loc[df_horas["Horas trabalhadas"] > 0]
 
 st.dataframe(filtered_df[["Data","Horas trabalhadas"]],hide_index = True)
