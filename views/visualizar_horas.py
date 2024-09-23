@@ -43,7 +43,7 @@ agora_pandas = pd.Timestamp(agora)
 agora_mes = agora_pandas.to_period('M')
 agora_ano = agora_pandas.year
 
-unique_periods = df_horas["period"].loc[df_horas["period"] <= agora_mes].unique().tolist()
+unique_periods = df_horas["period"].loc[df_horas["period"] <= agora_mes].sort_values().unique().tolist()
 unique_years = df_horas["ano"].unique().tolist()
 
 if agora_mes in unique_periods:
@@ -100,4 +100,4 @@ with col_1:
     st.dataframe(filtered_df[["Data","Horas trabalhadas"]],hide_index = True,use_container_width=True)
 
 with col_2:
-    st.metric("Horas Total (Mẽs)", f"{filtered_df['Horas trabalhadas'].sum():.2f}")
+    st.metric("Horas Total (Mês)", f"{filtered_df['Horas trabalhadas'].sum():.2f}")
