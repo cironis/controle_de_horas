@@ -65,13 +65,23 @@ df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
 heatmap_df = df_horas.pivot_table(index=['numero_do_dia_da_semana',"dia_da_semana"], columns='semana', values='Horas trabalhadas', aggfunc='sum',fill_value=0)
 
+heatmap_df = heatmap_df.sort_index(level='numero_do_dia_da_semana')
+
+hovertemplate = (
+    'Semana: %{x}<br>'
+    'Dia da semana: %{y}<br>'
+    'Horas trabalhadas: %{z}<extra></extra>'
+)
+
 heatmap_df = heatmap_df.reset_index(level='dia_da_semana')
 heatmap = go.Figure(data=go.Heatmap(
     z=heatmap_df.values,
     y=heatmap_df["dia_da_semana"].str[0:3],
+    x=heatmap_df.columns[1:],
     colorscale="Blues",
     xgap=2,
-    ygap=2
+    ygap=2,
+    hovertemplate=hovertemplate 
 ))
 
 heatmap.update_xaxes(showticklabels=False)
