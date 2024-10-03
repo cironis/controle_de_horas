@@ -21,15 +21,18 @@ authenticator = stauth.Authenticate(
 )
 
 # Login widget
-name, authentication_status, username = authenticator.login('main')
+teste = authenticator.login('main')
 
-if authentication_status:
-    authenticator.logout('Logout', 'sidebar')
-    st.sidebar.write(f'Welcome *{name}*')
-    # Main application code
-    st.title('Inserir Horas')
+st.write(teste)
+# name, authentication_status, username = authenticator.login('main')
 
-elif authentication_status == False:
-    st.error('Username/password is incorrect')
-elif authentication_status == None:
-    st.warning('Please enter your username and password')
+# if authentication_status:
+#     authenticator.logout('Logout', 'sidebar')
+#     st.sidebar.write(f'Welcome *{name}*')
+#     # Main application code
+#     st.title('Inserir Horas')
+
+# elif authentication_status == False:
+#     st.error('Username/password is incorrect')
+# elif authentication_status == None:
+#     st.warning('Please enter your username and password')
