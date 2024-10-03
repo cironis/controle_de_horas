@@ -15,13 +15,10 @@ with open('config/config.yaml') as file:
 # Initialize the authenticator
 authenticator = stauth.Authenticate(
     config['credentials'],
-    'the_cookie',           # Replace with your cookie name
+    'cookie',           # Replace with your cookie name
     signature_key,         # Replace with your signature key
     cookie_expiry_days=30
-
     )
-
-st.write(authenticator)
 
 name, authentication_status, username = authenticator.login('main')
 
