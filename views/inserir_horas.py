@@ -20,24 +20,18 @@ authenticator = stauth.Authenticate(
     cookie_expiry_days=30
     )
 
-# Check if user is already authenticated
-if 'authentication_status' not in st.session_state:
-    authenticator.login('main')
+authenticator.login('main')
 
-# If authenticated, skip login
-if st.session_state.get('authentication_status'):
-    authenticator.logout("Logout", "sidebar")
-    st.write(f'Welcome *{st.session_state["name"]}*')
-    st.title('Some content')
-else:
-    if st.session_state.get('authentication_status') is False:
-        st.error('Username/password is incorrect')
-    elif st.session_state.get('authentication_status') is None:
-        authenticator.login('main')
-        st.warning('Please enter your username and password')
-
-# Your other app logic goes here
 def load_main_dataframe(worksheet):
     conn = st.connection("gsheets", type=GSheetsConnection)
     df = conn.read(worksheet=worksheet)
     return df
+
+if st.session_state['authentication_status']:
+    authenticator.logout("Logout", "sidebar")
+    st.write(f'Welcome *{st.session_state["name"]}*')
+    st.title('Some content')
+elif st.session_state['authentication_status'] is False:
+    st.error('Username/password is incorrect')
+elif st.session_state['authentication_status'] is None:
+    st.warning('Please enter your username and password')
