@@ -20,19 +20,15 @@ authenticator = stauth.Authenticate(
     cookie_expiry_days=30
 )
 
-# Login widget
-teste = authenticator.login('main')
+name, authentication_status, username = authenticator.login('main')
 
-st.write(teste)
-# name, authentication_status, username = authenticator.login('main')
+if authentication_status:
+    authenticator.logout('Logout', 'sidebar')
+    st.sidebar.write(f'Welcome *{name}*')
+    # Main application code
+    st.title('Inserir Horas')
 
-# if authentication_status:
-#     authenticator.logout('Logout', 'sidebar')
-#     st.sidebar.write(f'Welcome *{name}*')
-#     # Main application code
-#     st.title('Inserir Horas')
-
-# elif authentication_status == False:
-#     st.error('Username/password is incorrect')
-# elif authentication_status == None:
-#     st.warning('Please enter your username and password')
+elif authentication_status == False:
+    st.error('Username/password is incorrect')
+elif authentication_status == None:
+    st.warning('Please enter your username and password')
