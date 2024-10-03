@@ -22,11 +22,22 @@ authenticator = stauth.Authenticate(
 
 name, authentication_status, username = authenticator.login('main')
 
+def load_main_dataframe(worksheet):
+    conn = st.connection("gsheets", type=GSheetsConnection)
+    df = conn.read(worksheet=worksheet)
+    return df
+
 if authentication_status:
     authenticator.logout('Logout', 'sidebar')
     st.sidebar.write(f'Welcome *{name}*')
     # Main application code
     st.title('Inserir Horas')
+    
+    df_horas = load_main_dataframe("Horas por dia")
+    df_horas["Dia"] = pd.to_datetime(df_horas["Dia"])
+    df_horas["Data"] = pd.to_datetime(df_horas["Dia"]).dt.strftime('%d/%m/%Y')
+    
+    st.dataframe(df_horas)
 
 elif authentication_status == False:
     st.error('Username/password is incorrect')
