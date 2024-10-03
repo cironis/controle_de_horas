@@ -20,6 +20,10 @@ authenticator = stauth.Authenticate(
     cookie_expiry_days=30
     )
 
+
+if st.session_state['authentication_status']:
+    st.write(st.session_state['authentication_status'])
+
 authenticator.login('main')
 
 def load_main_dataframe(worksheet):
