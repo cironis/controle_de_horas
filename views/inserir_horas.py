@@ -20,7 +20,7 @@ authenticator = stauth.Authenticate(
     cookie_expiry_days=30
     )
 
-name, authentication_status, username = authenticator.login('main')
+name, authentication_status, username = authenticator.login('Login', 'main')
 
 def load_main_dataframe(worksheet):
     conn = st.connection("gsheets", type=GSheetsConnection)
