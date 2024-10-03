@@ -9,7 +9,7 @@ import pandas as pd
 signature_key = st.secrets["credentials"]["signature_key"]
 
 # Load credentials from the config.yaml file
-with open('config/config.yaml') as file:
+with open('/config/config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 # Initialize the authenticator
@@ -18,7 +18,10 @@ authenticator = stauth.Authenticate(
     'the_cookie',           # Replace with your cookie name
     signature_key,         # Replace with your signature key
     cookie_expiry_days=30
-)
+
+    )
+
+st.write(authenticator)
 
 name, authentication_status, username = authenticator.login('main')
 
