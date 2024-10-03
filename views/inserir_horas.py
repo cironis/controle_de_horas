@@ -28,7 +28,7 @@ def load_main_dataframe(worksheet):
     return df
 
 if st.session_state['authentication_status']:
-    authenticator.logout()
+    authenticator.logout("Logout", "sidebar")
     st.write(f'Welcome *{st.session_state["name"]}*')
     st.title('Some content')
 elif st.session_state['authentication_status'] is False:
