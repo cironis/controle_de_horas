@@ -8,6 +8,8 @@ import pandas as pd
 # Access the signature key from st.secrets
 signature_key = st.secrets["credentials"]["signature_key"]
 
+st.write(signature_key)
+
 # Load credentials from the config.yaml file
 with open('config/config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
