@@ -27,19 +27,11 @@ def load_main_dataframe(worksheet):
     df = conn.read(worksheet=worksheet)
     return df
 
-if authentication_status:
-    authenticator.logout('Logout', 'sidebar')
-    st.sidebar.write(f'Welcome *{name}*')
-    # Main application code
-    st.title('Inserir Horas')
-    
-    df_horas = load_main_dataframe("Horas por dia")
-    df_horas["Dia"] = pd.to_datetime(df_horas["Dia"])
-    df_horas["Data"] = pd.to_datetime(df_horas["Dia"]).dt.strftime('%d/%m/%Y')
-    
-    st.dataframe(df_horas)
-
-elif authentication_status == False:
+if st.session_state['authentication_status']:
+    authenticator.logout()
+    st.write(f'Welcome *{st.session_state["name"]}*')
+    st.title('Some content')
+elif st.session_state['authentication_status'] is False:
     st.error('Username/password is incorrect')
-elif authentication_status == None:
+elif st.session_state['authentication_status'] is None:
     st.warning('Please enter your username and password')
