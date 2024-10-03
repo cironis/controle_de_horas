@@ -33,6 +33,7 @@ else:
     if st.session_state.get('authentication_status') is False:
         st.error('Username/password is incorrect')
     elif st.session_state.get('authentication_status') is None:
+        authenticator.login('main')
         st.warning('Please enter your username and password')
 
 # Your other app logic goes here
