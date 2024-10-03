@@ -20,9 +20,11 @@ authenticator = stauth.Authenticate(
     cookie_expiry_days=30
     )
 
-
-if st.session_state['authentication_status']:
-    st.write(st.session_state['authentication_status'])
+if 'cookie' in st.session_state:
+    st.write("Cookie value:")
+    st.write(st.session_state['cookie'])
+else:
+    st.write("No cookie found.")
 
 authenticator.login('main')
 
