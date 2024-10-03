@@ -12,8 +12,6 @@ signature_key = st.secrets["credentials"]["signature_key"]
 with open('config/config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
-st.write(config['credentials'])
-
 # Initialize the authenticator
 authenticator = stauth.Authenticate(
     config['credentials'],
