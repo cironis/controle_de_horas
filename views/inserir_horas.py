@@ -4,7 +4,7 @@ import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 import pandas as pd
-import datetime
+from datetime import datetime
 
 # Access the signature key from st.secrets
 signature_key = st.secrets["credentials"]["signature_key"]
