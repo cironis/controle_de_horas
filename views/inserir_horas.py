@@ -7,7 +7,8 @@ import pandas as pd
 from datetime import datetime
 from streamlit_gsheets import GSheetsConnection
 
-st.session_state['horas_inseridas'] = False
+if 'clicked' not in st.session_state:
+    st.session_state.clicked = False
 
 # Access the signature key from st.secrets
 signature_key = st.secrets["credentials"]["signature_key"]
@@ -46,7 +47,7 @@ def inserir_horas(date_picker,number_input):
     })
     df_horas = pd.concat([df_horas, novo_registro], ignore_index=True)
     update_dataframe("Horas por dia",df_horas)
-    st.session_state['horas_inseridas'] = True
+    st.session_state['clicked'] = True
     return True
 
 if st.session_state['authentication_status']:
@@ -57,7 +58,7 @@ if st.session_state['authentication_status']:
     number_input = st.number_input("Horas para inserir", min_value=0.0, step=0.5)
     button_return = st.button('Inserir Horas', on_click=inserir_horas, args=(date_picker,number_input))
 
-    if st.session_state['horas_inseridas']:
+    if st.session_state['clicked']:
         st.success('Horas inseridas com sucesso!')
         st.balloons()
 
