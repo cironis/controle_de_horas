@@ -6,6 +6,9 @@ from yaml.loader import SafeLoader
 import pandas as pd
 from datetime import datetime
 from streamlit_gsheets import GSheetsConnection
+import locale
+
+locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
 if 'clicked' not in st.session_state:
     st.session_state.clicked = False
@@ -80,18 +83,36 @@ if st.session_state['authentication_status']:
 
     if st.session_state['clicked']:
         st.success('Horas inseridas com sucesso!')
+    
+    st.markdown(f'# Total por Mês')
 
     df_horas_total = load_main_dataframe("Horas por dia")
     df_horas_total["Dia"] = pd.to_datetime(df_horas_total["Dia"])
+    total_horas = df_horas_total.loc[df_horas_total["Dia"].dt.to_period('M') == mes_selecionado,"Horas trabalhadas"].sum()
+    valor_por_hora = 130
+    valor_a_receber = f"R${total_horas*valor_por_hora:.2f}"
+    
  
     total_1, total_2 = st.columns([1,3])
+
     with total_1:
         mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M').sort_values(ascending = False),index=0)
-    with total_2:
-        total_horas = df_horas_total.loc[df_horas_total["Dia"].dt.to_period('M') == mes_selecionado,"Horas trabalhadas"].sum()
-        valor_por_hora = 130
-        st.markdown(f"# Horas total do Mês: {total_horas} horas")
-        st.markdown(f"# Valor: R$ {total_horas*valor_por_hora:.2f}")    
+        mes = mes_selecionado.to_timestamp()
+        mes = mes.strftime('%B/%Y')
+
+    with total_2:        
+        st.markdown(f"## Horas total do Mês: {total_horas} horas")
+        st.markdown(f"## Valor: {valor_a_receber}")    
+
+    st.markdown(f'# Email Copia e cola')
+
+    st.markdown(f"""
+                    <p>OI Luis, tudo bem?</p>
+                    <p>Segue a nota referente ao mês {mes}.</p>
+                    <p>Foram {total_horas} horas trabalhadas, que totalizam <a href='https://controle-de-horas.streamlit.app/'>{valor_a_receber}</a>.</p>
+                    <p>Qualquer dúvida, estou à disposição.</p>
+                    <p>Obrigado.</p>""",unsafe_allow_html=True)
+
 
 elif st.session_state['authentication_status'] is False:
     st.error('Username/password is incorrect')
