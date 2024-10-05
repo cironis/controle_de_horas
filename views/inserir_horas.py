@@ -115,8 +115,8 @@ if st.session_state['authentication_status']:
 
     st.markdown(f"""
         <p>OI Luis, tudo bem?</p>
-        Segue a nota referente ao mês {mes}. <br>
-        Foram {total_horas} horas trabalhadas, que totalizam <a href='https://controle-de-horas.streamlit.app/'>{valor_a_receber}</a>. <br>
+        <p>Segue a nota referente ao mês {mes}. <br>
+        Foram {total_horas} horas trabalhadas, que totalizam <a href='https://controle-de-horas.streamlit.app/'>{valor_a_receber}</a>.</p>
         <p>Qualquer dúvida, estou à disposição.</p> 
         <p>Obrigado.</p>
         """, unsafe_allow_html=True)
