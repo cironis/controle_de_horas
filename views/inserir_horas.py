@@ -86,9 +86,9 @@ if st.session_state['authentication_status']:
  
     total_1, total_2 = st.columns([3,1])
     with total_2:
-        mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.month.unique())
+        mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M'),index=0)
     with total_1:
-        total_horas = df_horas_total.loc[df_horas_total["Dia"].dt.month == mes_selecionado,"Horas trabalhadas"].sum()
+        total_horas = df_horas_total.loc[df_horas_total["Dia"].dt.to_period('M') == mes_selecionado,"Horas trabalhadas"].sum()
         st.markdown(f"# Horas total do Mês {total_horas}")    
 
 elif st.session_state['authentication_status'] is False:
