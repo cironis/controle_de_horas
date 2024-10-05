@@ -30,6 +30,7 @@ authenticator.login('main')
 def load_main_dataframe(worksheet):
     conn = st.connection("gsheets", type=GSheetsConnection)
     df = conn.read(worksheet=worksheet)
+
     return df
 
 def update_dataframe(worksheet,df):
@@ -48,6 +49,7 @@ def inserir_horas(date_picker,number_input):
     df_horas = pd.concat([df_horas, novo_registro], ignore_index=True)
     update_dataframe("Horas por dia",df_horas)
     st.session_state['clicked'] = True
+
     return True
 
 if st.session_state['authentication_status']:
