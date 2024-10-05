@@ -55,7 +55,8 @@ def inserir_horas(date_picker,number_input):
     df_horas = pd.concat([df_horas, novo_registro], ignore_index=True)
     update_dataframe("Horas por dia",df_horas)
     st.session_state['clicked'] = True
-
+    st.balloons()
+    
     return True
 
 if st.session_state['authentication_status']:
@@ -68,7 +69,6 @@ if st.session_state['authentication_status']:
 
     if st.session_state['clicked']:
         st.success('Horas inseridas com sucesso!')
-        st.balloons()
 
 elif st.session_state['authentication_status'] is False:
     st.error('Username/password is incorrect')
