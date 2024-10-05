@@ -41,6 +41,12 @@ def update_dataframe(worksheet,df):
 
 def inserir_horas(date_picker,number_input):
     df_horas = load_main_dataframe("Horas por dia")
+
+    if 'horas_df' not in st.session_state:
+        st.session_state['horas_df'] = df_horas
+    else:
+        df_horas = st.session_state['horas_df']
+
     df_horas["Dia"] = pd.to_datetime(df_horas["Dia"])
     novo_registro = pd.DataFrame({
         "Dia": [date_picker],
@@ -60,7 +66,7 @@ if st.session_state['authentication_status']:
     number_input = st.number_input("Horas para inserir", min_value=0.0, step=0.5)
     button_return = st.button('Inserir Horas', on_click=inserir_horas, args=(date_picker,number_input))
 
-    if st.session_state['clicked']:
+    if button_return:
         st.success('Horas inseridas com sucesso!')
         st.balloons()
 
