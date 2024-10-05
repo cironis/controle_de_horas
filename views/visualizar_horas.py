@@ -17,7 +17,7 @@ def load_main_dataframe(worksheet):
 # Carregando df das horas trabalhadas
 df_horas = load_main_dataframe("Horas por dia")
 
-df_horas["Dia"] = pd.to_datetime(df_horas["Dia"])
+df_horas["Dia"] = pd.to_datetime(df_horas["Dia"],format='ISO8601')
 df_horas["Data"] = pd.to_datetime(df_horas["Dia"]).dt.strftime('%d/%m/%Y')
 anos = df_horas["Dia"].dt.year.unique()
 
