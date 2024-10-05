@@ -55,8 +55,6 @@ if st.session_state['authentication_status']:
     number_input = st.number_input("Horas para inserir", min_value=0.0, step=0.5)
     st.button('Inserir Horas', on_click=inserir_horas, args=(date_picker,number_input))
 
-
-
 elif st.session_state['authentication_status'] is False:
     st.error('Username/password is incorrect')
 elif st.session_state['authentication_status'] is None:
