@@ -25,9 +25,10 @@ authenticator = stauth.Authenticate(
     cookie_expiry_days=30
     )
 
-if st.query_params["auto_login"] == "vai_vamo_logo":
+if "auto_login" in st.query_params:
+    if st.query_params["auto_login"] == "vai_vamo_logo":
 
-    st.session_state['authentication_status'] = True
+        st.session_state['authentication_status'] = True
 
 else:
 
