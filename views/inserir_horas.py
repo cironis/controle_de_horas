@@ -85,11 +85,13 @@ if st.session_state['authentication_status']:
     df_horas_total["Dia"] = pd.to_datetime(df_horas_total["Dia"])
  
     total_1, total_2 = st.columns([3,1])
-    with total_2:
-        mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M').sort_values(ascending = False),index=0)
     with total_1:
+        mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M').sort_values(ascending = False),index=0)
+    with total_2:
         total_horas = df_horas_total.loc[df_horas_total["Dia"].dt.to_period('M') == mes_selecionado,"Horas trabalhadas"].sum()
-        st.markdown(f"# Horas total do Mês {total_horas}")    
+        valor_por_hora = 130
+        st.markdown(f"# Horas total do Mês: {total_horas} horas")
+        st.markdown(f"# Valor: {total_horas*valor_por_hora} horas")    
 
 elif st.session_state['authentication_status'] is False:
     st.error('Username/password is incorrect')
