@@ -87,12 +87,11 @@ if st.session_state['authentication_status']:
 
     with total_1:
         df_horas_total = load_main_dataframe("Horas por dia")
-        mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M').sort_values(ascending = False),index=0)
-
         df_horas_total["Dia"] = pd.to_datetime(df_horas_total["Dia"])
+
+        mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M').sort_values(ascending = False),index=0)        
         
         total_horas = df_horas_total.loc[df_horas_total["Dia"].dt.to_period('M') == mes_selecionado,"Horas trabalhadas"].sum()
-        
         valor_por_hora = 130
         valor_a_receber = f"R${total_horas*valor_por_hora:.2f}"
         
