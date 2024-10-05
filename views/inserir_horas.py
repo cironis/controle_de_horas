@@ -6,9 +6,6 @@ from yaml.loader import SafeLoader
 import pandas as pd
 from datetime import datetime
 from streamlit_gsheets import GSheetsConnection
-import locale
-
-locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
 if 'clicked' not in st.session_state:
     st.session_state.clicked = False
@@ -97,8 +94,18 @@ if st.session_state['authentication_status']:
 
     with total_1:
         mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M').sort_values(ascending = False),index=0)
-        mes = mes_selecionado.to_timestamp()
-        mes = mes.strftime('%B/%Y')
+
+        month_names_pt_br = {
+            1: 'janeiro', 2: 'fevereiro', 3: 'março', 4: 'abril',
+            5: 'maio', 6: 'junho', 7: 'julho', 8: 'agosto',
+            9: 'setembro', 10: 'outubro', 11: 'novembro', 12: 'dezembro'
+        }
+
+        month = mes_selecionado.month
+        year = mes_selecionado.year
+        month_name_pt_br = month_names_pt_br[month]
+
+        mes = f"{month_name_pt_br}/{year}"
 
     with total_2:        
         st.markdown(f"## Horas total do Mês: {total_horas} horas")

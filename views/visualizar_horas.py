@@ -57,6 +57,20 @@ else:
 
 st.title("Controle de horas")
 
+st.markdown("## Horas por dia")
+
+seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_index)
+filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
+filtered_df = filtered_df.loc[df_horas["Horas trabalhadas"] > 0]
+
+col_1,col_2 = st.columns(2)
+
+with col_1:
+    st.dataframe(filtered_df[["Data","Horas trabalhadas"]],hide_index = True,use_container_width=True)
+
+with col_2:
+    st.metric("Horas Total (Mês)", f"{filtered_df['Horas trabalhadas'].sum():.2f}")
+
 st.markdown("## Ano")
 
 seletor_ano = st.selectbox("Selecione o ano", unique_years,index=default_ano_index)
@@ -86,17 +100,3 @@ heatmap = go.Figure(data=go.Heatmap(
 heatmap.update_xaxes(showticklabels=False)
 
 st.plotly_chart(heatmap)
-
-st.markdown("## Horas por dia")
-
-seletor_mes = st.selectbox("Selecione o mês", unique_periods,index=default_mes_index)
-filtered_df = df_horas.loc[df_horas["period"] == seletor_mes]
-filtered_df = filtered_df.loc[df_horas["Horas trabalhadas"] > 0]
-
-col_1,col_2 = st.columns(2)
-
-with col_1:
-    st.dataframe(filtered_df[["Data","Horas trabalhadas"]],hide_index = True,use_container_width=True)
-
-with col_2:
-    st.metric("Horas Total (Mês)", f"{filtered_df['Horas trabalhadas'].sum():.2f}")
