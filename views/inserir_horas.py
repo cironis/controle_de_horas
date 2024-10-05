@@ -91,7 +91,7 @@ if st.session_state['authentication_status']:
         total_horas = df_horas_total.loc[df_horas_total["Dia"].dt.to_period('M') == mes_selecionado,"Horas trabalhadas"].sum()
         valor_por_hora = 130
         st.markdown(f"# Horas total do Mês: {total_horas} horas")
-        st.markdown(f"# Valor: {total_horas*valor_por_hora} horas")    
+        st.markdown(f"# Valor: R$ {total_horas*valor_por_hora:.2f}")    
 
 elif st.session_state['authentication_status'] is False:
     st.error('Username/password is incorrect')
