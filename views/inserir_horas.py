@@ -73,7 +73,7 @@ def inserir_horas(date_picker,number_input):
 if st.session_state['authentication_status']:
 
     authenticator.logout("Logout", "sidebar")
-    st.markdown(f'#Inserir Horas')
+    st.markdown(f'# Inserir Horas')
     date_picker = st.date_input("Data", datetime.today(),format="DD/MM/YYYY")
     number_input = st.number_input("Horas para inserir", min_value=0.0, step=0.5)
     button_return = st.button('Inserir Horas', on_click=inserir_horas, args=(date_picker,number_input))
