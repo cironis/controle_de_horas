@@ -5,6 +5,7 @@ import yaml
 from yaml.loader import SafeLoader
 import pandas as pd
 from datetime import datetime
+from streamlit_gsheets import GSheetsConnection
 
 # Access the signature key from st.secrets
 signature_key = st.secrets["credentials"]["signature_key"]
