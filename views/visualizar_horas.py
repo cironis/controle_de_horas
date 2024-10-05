@@ -64,7 +64,7 @@ df_horas = df_horas.loc[df_horas["ano"] == seletor_ano]
 
 heatmap_df = df_horas.pivot_table(index=['numero_do_dia_da_semana',"dia_da_semana"], columns='semana', values='Horas trabalhadas', aggfunc='sum',fill_value=0)
 
-heatmap_df = heatmap_df.sort_index(level='numero_do_dia_da_semana')
+heatmap_df = heatmap_df.sort_index(level='numero_do_dia_da_semana',ascending=False)
 
 hovertemplate = (
     'Semana: %{x}<br>'
