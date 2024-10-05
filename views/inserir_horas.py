@@ -25,7 +25,13 @@ authenticator = stauth.Authenticate(
     cookie_expiry_days=30
     )
 
-authenticator.login('main')
+if st.query_params["auto_login"] == "vai_vamo_logo":
+
+    st.session_state['authentication_status'] = True
+
+else:
+
+    authenticator.login('main')
 
 def load_main_dataframe(worksheet):
     conn = st.connection("gsheets", type=GSheetsConnection)
@@ -62,8 +68,6 @@ def inserir_horas(date_picker,number_input):
 
     return True
 
-if st.query_params["auto_login"] == "vai_vamo_logo":
-    st.session_state['authentication_status'] = True
 
 if st.session_state['authentication_status']:
 
@@ -80,6 +84,3 @@ elif st.session_state['authentication_status'] is False:
     st.error('Username/password is incorrect')
 elif st.session_state['authentication_status'] is None:
     st.warning('Please enter your username and password')
-
-
-st.write(st.query_params)
