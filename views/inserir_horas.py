@@ -114,13 +114,12 @@ if st.session_state['authentication_status']:
     st.markdown(f'# Email Copia e cola')
 
     st.markdown(f"""
-    OI Luis, tudo bem?\n
-    Segue a nota referente ao mês {mes}.\n
-    Foram {total_horas} horas trabalhadas, que totalizam {valor_a_receber}.
-    \n
-    Qualquer dúvida, estou à disposição.
-    Obrigado.
-    """, unsafe_allow_html=True)
+        <p>OI Luis, tudo bem?</p>
+        Segue a nota referente ao mês {mes}. <br>
+        Foram {total_horas} horas trabalhadas, que totalizam <a href='https://controle-de-horas.streamlit.app/'>{valor_a_receber}</a>. <br>
+        <p>Qualquer dúvida, estou à disposição. <br>
+        Obrigado.</p>
+        """, unsafe_allow_html=True)
 
 
 elif st.session_state['authentication_status'] is False:
