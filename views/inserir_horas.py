@@ -116,9 +116,9 @@ if st.session_state['authentication_status']:
     st.markdown(f"""
     OI Luis, tudo bem?\n
     Segue a nota referente ao mês {mes}.\n
-    Foram {total_horas} horas trabalhadas, que totalizam {valor_a_receber}.\n
+    Foram {total_horas} horas trabalhadas, que totalizam {valor_a_receber}.
     \n
-    Qualquer dúvida, estou à disposição.\n
+    Qualquer dúvida, estou à disposição.
     Obrigado.
     """, unsafe_allow_html=True)
 
