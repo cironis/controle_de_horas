@@ -87,7 +87,7 @@ if st.session_state['authentication_status']:
 
     with total_1:
         df_horas_total = load_main_dataframe("Horas por dia")
-        df_horas_total["Dia"] = pd.to_datetime(df_horas_total["Dia"])
+        df_horas_total["Dia"] = pd.to_datetime(df_horas_total["Dia"],format='mixed')
 
         mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M').sort_values(ascending = False).unique(),index=0)
 
