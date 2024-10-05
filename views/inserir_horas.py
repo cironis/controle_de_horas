@@ -81,6 +81,15 @@ if st.session_state['authentication_status']:
     if st.session_state['clicked']:
         st.success('Horas inseridas com sucesso!')
 
+    df_horas_total = load_main_dataframe("Horas por dia")
+ 
+    total_1, total_2 = st.columns([3,1])
+    with total_2:
+        mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.month.unique())
+    with total_1:
+        total_horas = df_horas_total.loc[df_horas_total["Dia"] == mes_selecionado,"Horas trabalhadas"].sum()
+        st.markdown(f"# Horas total do Mês {total_horas}")    
+
 elif st.session_state['authentication_status'] is False:
     st.error('Username/password is incorrect')
 elif st.session_state['authentication_status'] is None:
