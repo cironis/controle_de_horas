@@ -83,43 +83,45 @@ if st.session_state['authentication_status']:
 
     st.markdown(f'# Total por Mês')
 
-    total_1, total_2 = st.columns([1,3])
+    if st.button("Gerar Relatório"):
 
-    with total_1:
-        df_horas_total = load_main_dataframe("Horas por dia")
-        df_horas_total["Dia"] = pd.to_datetime(df_horas_total["Dia"],format='mixed')
+        total_1, total_2 = st.columns([1,3])
 
-        mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M').sort_values(ascending = False).unique(),index=0)
+        with total_1:
+            df_horas_total = load_main_dataframe("Horas por dia")
+            df_horas_total["Dia"] = pd.to_datetime(df_horas_total["Dia"],format='mixed')
 
-        total_horas = df_horas_total.loc[df_horas_total["Dia"].dt.to_period('M') == mes_selecionado,"Horas trabalhadas"].sum()
-        valor_por_hora = 130
-        valor_a_receber = f"R${total_horas*valor_por_hora:.2f}"
+            mes_selecionado = st.selectbox("Selecione o mês", df_horas_total["Dia"].dt.to_period('M').sort_values(ascending = False).unique(),index=0)
 
-        month_names_pt_br = {
-            1: 'janeiro', 2: 'fevereiro', 3: 'março', 4: 'abril',
-            5: 'maio', 6: 'junho', 7: 'julho', 8: 'agosto',
-            9: 'setembro', 10: 'outubro', 11: 'novembro', 12: 'dezembro'
-        }
+            total_horas = df_horas_total.loc[df_horas_total["Dia"].dt.to_period('M') == mes_selecionado,"Horas trabalhadas"].sum()
+            valor_por_hora = 130
+            valor_a_receber = f"R${total_horas*valor_por_hora:.2f}"
 
-        month = mes_selecionado.month
-        year = mes_selecionado.year
-        month_name_pt_br = month_names_pt_br[month]
+            month_names_pt_br = {
+                1: 'janeiro', 2: 'fevereiro', 3: 'março', 4: 'abril',
+                5: 'maio', 6: 'junho', 7: 'julho', 8: 'agosto',
+                9: 'setembro', 10: 'outubro', 11: 'novembro', 12: 'dezembro'
+            }
 
-        mes = f"{month_name_pt_br}/{year}"
+            month = mes_selecionado.month
+            year = mes_selecionado.year
+            month_name_pt_br = month_names_pt_br[month]
 
-    with total_2:
-        st.markdown(f"## Horas total do Mês: {total_horas} horas")
-        st.markdown(f"## Valor: {valor_a_receber}")
+            mes = f"{month_name_pt_br}/{year}"
 
-    st.markdown(f'# Email Copia e cola')
+        with total_2:
+            st.markdown(f"## Horas total do Mês: {total_horas} horas")
+            st.markdown(f"## Valor: {valor_a_receber}")
 
-    st.markdown(f"""
-        <p>OI Luis, tudo bem?</p>
-        <p>Segue a nota referente ao mês {mes}. <br>
-        Foram {total_horas} horas trabalhadas, que totalizam <a href='https://controle-de-horas.streamlit.app/'>{valor_a_receber}</a>.</p>
-        <p>Qualquer dúvida, estou à disposição.<br> 
-        Obrigado.</p>
-        """, unsafe_allow_html=True)
+        st.markdown(f'# Email Copia e cola')
+
+        st.markdown(f"""
+            <p>OI Luis, tudo bem?</p>
+            <p>Segue a nota referente ao mês {mes}. <br>
+            Foram {total_horas} horas trabalhadas, que totalizam <a href='https://controle-de-horas.streamlit.app/'>{valor_a_receber}</a>.</p>
+            <p>Qualquer dúvida, estou à disposição.<br>
+            Obrigado.</p>
+            """, unsafe_allow_html=True)
 
 
 elif st.session_state['authentication_status'] is False:
