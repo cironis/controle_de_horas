@@ -54,7 +54,7 @@ def inserir_horas(date_picker,number_input):
     else:
         df_horas = st.session_state['horas_df']
 
-    df_horas["Dia"] = pd.to_datetime(df_horas["Dia"])
+    df_horas["Dia"] = pd.to_datetime(df_horas["Dia"],format='mixed')
     novo_registro = pd.DataFrame({
         "Dia": [date_picker],
         "Horas trabalhadas": [number_input]
@@ -82,7 +82,7 @@ if st.session_state['authentication_status']:
         st.success('Horas inseridas com sucesso!')
 
     st.markdown(f'# Total por Mês')
-    
+
     total_1, total_2 = st.columns([1,3])
 
     with total_1:
